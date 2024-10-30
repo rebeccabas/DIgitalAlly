@@ -1,7 +1,14 @@
 import React from 'react';
 import { FileText, Camera, Mic, Shield } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function ReportIncident() {
+  const navigate = useNavigate();
+
+  const handleGenerateComplaint = () => {
+    navigate('/generate-complaint');
+  };
+
   return (
     <section id="report" className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,6 +84,16 @@ export default function ReportIncident() {
             >
               <Shield className="h-5 w-5 mr-2" />
               Submit Report Securely
+            </button>
+
+            {/* New Button for Generating Complaint Letter */}
+            <button
+              type="button"
+              onClick={handleGenerateComplaint}
+              className="w-full mt-4 flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              <FileText className="h-5 w-5 mr-2" />
+              Generate Complaint Letter
             </button>
           </form>
         </div>
