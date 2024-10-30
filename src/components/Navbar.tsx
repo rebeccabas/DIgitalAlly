@@ -1,9 +1,11 @@
-import React from 'react';
-import { Shield, Menu, X, Heart } from 'lucide-react';
+import React, { useState } from 'react';
+import { Shield, Menu, X, Heart, MessageCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -13,10 +15,15 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleChatSupportClick = () => {
+    navigate('/chatbot');
+  };
+
+  
+
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-    }`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex items-center space-x-2">
@@ -30,19 +37,27 @@ export default function Navbar() {
               <span className="text-xs text-purple-600">Women's Rights</span>
             </div>
           </div>
-          
+
           <div className="hidden md:flex items-center space-x-8">
             <NavLink href="#map">Global Map</NavLink>
             <NavLink href="#report">Report Incident</NavLink>
             <NavLink href="#resources">Resources</NavLink>
+            <button
+              onClick={handleChatSupportClick}
+              className="flex items-center px-4 py-2 rounded-full bg-purple-100 text-purple-600 font-medium hover:bg-purple-200 transition-all duration-300"
+            >
+              <MessageCircle className="h-4 w-4 mr-2" />
+              Chat Support
+            </button>
             <button className="flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
               <Heart className="h-4 w-4 mr-2" />
               Emergency Help
             </button>
+
           </div>
 
           <div className="md:hidden flex items-center">
-            <button 
+            <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-lg bg-purple-50 text-purple-600 hover:bg-purple-100 transition-colors duration-300"
             >
@@ -67,7 +82,14 @@ export default function Navbar() {
           <MobileNavLink href="#resources" onClick={() => setIsOpen(false)}>
             Resources
           </MobileNavLink>
-          <button 
+          <button
+            className="flex items-center px-4 py-2 rounded-full bg-purple-100 text-purple-600 font-medium hover:bg-purple-200 transition-all duration-300"
+          >
+            <MessageCircle className="h-4 w-4 mr-2" />
+            Chat Support
+          </button>
+
+          <button
             onClick={() => setIsOpen(false)}
             className="w-full flex items-center justify-center px-4 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium shadow-lg"
           >
@@ -75,7 +97,9 @@ export default function Navbar() {
             Emergency Help
           </button>
         </div>
+
       </div>
+
     </nav>
   );
 }
