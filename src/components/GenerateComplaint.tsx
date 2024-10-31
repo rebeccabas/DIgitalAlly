@@ -23,7 +23,7 @@ function GenerateComplaint() {
 
   const [complaintLetter, setComplaintLetter] = useState('');
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -49,244 +49,87 @@ function GenerateComplaint() {
   };
 
   return (
-    <div className="container mx-auto my-8">
-      <h1 className="text-2xl font-bold mb-6">Generate Complaint</h1>
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="filing-type">
-            Filing Type:
-          </label>
-          <select
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="filing-type"
-            name="filing_type"
-            value={formData.filing_type}
-            onChange={handleInputChange}
-          >
-            <option value="self">Self</option>
-            <option value="third_party">Third Party</option>
-          </select>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-indigo-50 to-pink-50">
+      <div className="w-full max-w-2xl p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+        <div className="text-center py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-t-lg text-white">
+          <h1 className="text-2xl font-bold">Generate Complaint</h1>
+          <p className="text-sm">"Fill in the details to generate your complaint letter"</p>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="complainant-name">
-            Complainant Name:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="complainant-name"
-            type="text"
-            name="complainant_name"
-            value={formData.complainant_name}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="complainant-address">
-            Complainant Address:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="complainant-address"
-            type="text"
-            name="complainant_address"
-            value={formData.complainant_address}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="complainant-contact">
-            Complainant Contact:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="complainant-contact"
-            type="text"
-            name="complainant_contact"
-            value={formData.complainant_contact}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="complainant-email">
-            Complainant Email:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="complainant-email"
-            type="email"
-            name="complainant_email"
-            value={formData.complainant_email}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="victim-name">
-            Victim Name:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="victim-name"
-            type="text"
-            name="victim_name"
-            value={formData.victim_name}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="victim-address">
-            Victim Address:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="victim-address"
-            type="text"
-            name="victim_address"
-            value={formData.victim_address}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="relationship-to-victim">
-            Relationship to Victim:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="relationship-to-victim"
-            type="text"
-            name="relationship_to_victim"
-            value={formData.relationship_to_victim}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="filing-authority">
-            Filing Authority:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="filing-authority"
-            type="text"
-            name="filing_authority"
-            value={formData.filing_authority}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="filing-authority-address">
-            Filing Authority Address:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="filing-authority-address"
-            type="text"
-            name="filing_authority_address"
-            value={formData.filing_authority_address}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="incident-details">
-            Incident Details:
-          </label>
-          <textarea
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="incident-details"
-            name="incident_details"
-            value={formData.incident_details}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="date-of-incident">
-            Date of Incident:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="date-of-incident"
-            type="date"
-            name="date_of_incident"
-            value={formData.date_of_incident}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="time-of-incident">
-            Time of Incident:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="time-of-incident"
-            type="time"
-            name="time_of_incident"
-            value={formData.time_of_incident}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="location-of-incident">
-            Location of Incident:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="location-of-incident"
-            type="text"
-            name="location_of_incident"
-            value={formData.location_of_incident}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="injuries-sustained">
-            Injuries Sustained:
-          </label>
-          <textarea
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="injuries-sustained"
-            name="injuries_sustained"
-            value={formData.injuries_sustained}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="witness-information">
-            Witness Information:
-          </label>
-          <textarea
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="witness-information"
-            name="witness_information"
-            value={formData.witness_information}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="evidence-description">
-            Evidence Description:
-          </label>
-          <textarea
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="evidence-description"
-            name="evidence_description"
-            value={formData.evidence_description}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex justify-center">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="button"
-            onClick={generateComplaintLetter}
-          >
-            Generate Complaint Letter
-          </button>
-        </div>
-      </form>
-      {complaintLetter && (
-        <div>
-          <h2 className="text-xl font-bold mb-4">Complaint Letter</h2>
-          <pre className="bg-gray-100 p-4 rounded shadow">{complaintLetter}</pre>
-        </div>
-      )}
+        <form className="space-y-4 p-4">
+          {[
+            { label: "Filing Type", name: "filing_type", type: "select", options: ["Self", "Third Party"] },
+            { label: "Complainant Name", name: "complainant_name", type: "text" },
+            { label: "Complainant Address", name: "complainant_address", type: "text" },
+            { label: "Complainant Contact", name: "complainant_contact", type: "text" },
+            { label: "Complainant Email", name: "complainant_email", type: "email" },
+            { label: "Victim Name", name: "victim_name", type: "text" },
+            { label: "Victim Address", name: "victim_address", type: "text" },
+            { label: "Relationship to Victim", name: "relationship_to_victim", type: "text" },
+            { label: "Filing Authority", name: "filing_authority", type: "text" },
+            { label: "Filing Authority Address", name: "filing_authority_address", type: "text" },
+            { label: "Incident Details", name: "incident_details", type: "textarea" },
+            { label: "Date of Incident", name: "date_of_incident", type: "date" },
+            { label: "Time of Incident", name: "time_of_incident", type: "time" },
+            { label: "Location of Incident", name: "location_of_incident", type: "text" },
+            { label: "Injuries Sustained", name: "injuries_sustained", type: "textarea" },
+            { label: "Witness Information", name: "witness_information", type: "textarea" },
+            { label: "Evidence Description", name: "evidence_description", type: "textarea" }
+          ].map((field, index) => (
+            <div key={index} className="flex flex-col">
+              <label className="text-gray-700 font-semibold mb-2" htmlFor={field.name}>
+                {field.label}:
+              </label>
+              {field.type === "select" ? (
+                <select
+                  id={field.name}
+                  name={field.name}
+                  value={formData[field.name]}
+                  onChange={handleInputChange}
+                  className="p-3 rounded-lg border border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  {field.options?.map((option, i) => (
+                    <option key={i} value={option.toLowerCase()}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              ) : field.type === "textarea" ? (
+                <textarea
+                  id={field.name}
+                  name={field.name}
+                  value={formData[field.name]}
+                  onChange={handleInputChange}
+                  className="p-3 rounded-lg border border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              ) : (
+                <input
+                  id={field.name}
+                  name={field.name}
+                  type={field.type}
+                  value={formData[field.name]}
+                  onChange={handleInputChange}
+                  className="p-3 rounded-lg border border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              )}
+            </div>
+          ))}
+          <div className="flex justify-center">
+            <button
+              type="button"
+              onClick={generateComplaintLetter}
+              className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-80 text-white px-4 py-2 rounded-lg transition-colors duration-300"
+            >
+              Generate Complaint Letter
+            </button>
+          </div>
+        </form>
+        {complaintLetter && (
+          <div className="mt-6 p-4 bg-gray-100 rounded-lg shadow">
+            <h2 className="text-xl font-bold mb-4">Complaint Letter</h2>
+            <pre className="whitespace-pre-wrap">{complaintLetter}</pre>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
