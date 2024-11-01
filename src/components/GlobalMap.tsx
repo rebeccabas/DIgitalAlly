@@ -1,5 +1,7 @@
 import React from 'react';
 import { MapPin } from 'lucide-react';
+import MapView from './Map';
+import { mockIncidents } from '../data/mockData';
 
 export default function GlobalMap() {
     return (
@@ -15,29 +17,9 @@ export default function GlobalMap() {
                 </div>
 
                 <div className="mt-12 bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div className="relative h-[600px] bg-gray-100 flex items-center justify-center">
-                        <div className="text-center">
-                            <MapPin className="h-12 w-12 text-purple-600 mx-auto" />
-                            <p className="mt-4 text-gray-600">Interactive map visualization coming soon</p>
-                            <p className="text-sm text-gray-500">Powered by real-time data analytics</p>
-                        </div>
-                    </div>
-
-                    <div className="bg-white px-6 py-4">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div className="p-4 border rounded-lg">
-                                <h3 className="font-semibold text-gray-900">Active Cases</h3>
-                                <p className="text-2xl font-bold text-purple-600">1,234</p>
-                            </div>
-                            <div className="p-4 border rounded-lg">
-                                <h3 className="font-semibold text-gray-900">Resolved</h3>
-                                <p className="text-2xl font-bold text-green-600">789</p>
-                            </div>
-                            <div className="p-4 border rounded-lg">
-                                <h3 className="font-semibold text-gray-900">Support Networks</h3>
-                                <p className="text-2xl font-bold text-blue-600">456</p>
-                            </div>
-                        </div>
+                    <div className="relative h-[600px]">
+                        {/* Render the MapView component */}
+                        <MapView incidents={mockIncidents} />
                     </div>
                 </div>
             </div>
