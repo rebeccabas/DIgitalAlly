@@ -3,8 +3,6 @@ export interface Incident {
     latitude: number;
     longitude: number;
     timestamp: string;
-    severity: number;
-    status: 'active' | 'resolved' | 'pending';
     description: string;
     category: string;
 }
