@@ -1,10 +1,10 @@
 export interface Incident {
-    id: string;
     latitude: number;
     longitude: number;
     timestamp: string;
     description: string;
     category: string;
+    anonymous: boolean;
 }
 
 export interface Cluster {
