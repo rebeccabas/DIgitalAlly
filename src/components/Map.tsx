@@ -27,7 +27,7 @@ const MapView: React.FC<MapViewProps> = ({ incidents }) => {
 
             // Perform clustering
             const clustered = turf.clustersKmeans(points, {
-                numberOfClusters: Math.min(3, incidents.length),
+                numberOfClusters: Math.min(6, incidents.length),
                 mutate: true
             });
 

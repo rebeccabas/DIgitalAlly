@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import { collection, addDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { firestore, storage } from '../components/firebaseConfig';
+import axios from 'axios';
 
 const LocationMarker = ({ setLocation }) => {
   useMapEvents({
@@ -31,16 +32,16 @@ export default function ReportIncident() {
 
   const handleReportSubmit = async (e) => {
     e.preventDefault();
-  
+
     const type = document.getElementById('type')?.value || 'N/A';
     const description = document.getElementById('description')?.value || '';
     const anonymous = document.getElementById('anonymous')?.checked || false;
-  
+
     if (!location) {
       alert("Please select a location on the map.");
       return;
     }
-  
+
     const incidentData = {
       type,
       description,
@@ -48,23 +49,39 @@ export default function ReportIncident() {
       anonymous,
       timestamp: new Date(),
     };
-  
+
+
+    try {
+      // Send data to Node server to save and send email
+      await axios.post('http://localhost:5000/send-report', incidentData);
+      alert('Incident reported successfully and email sent');
+
+      // Clear form fields
+      document.getElementById('type').value = '';
+      document.getElementById('description').value = '';
+      document.getElementById('anonymous').checked = false;
+    } catch (error) {
+      console.error('Error submitting report:', error);
+      alert('Error submitting report');
+    }
+
+
     try {
       const docRef = await addDoc(collection(firestore, 'incidents1'), incidentData);
       console.log('Document written with ID: ', docRef.id);
       alert('Incident reported successfully');
-      
+
       // Optionally clear form fields or reset state here, without redirection
       document.getElementById('type').value = ''; // Resetting example
       document.getElementById('description').value = '';
       document.getElementById('anonymous').checked = false;
-  
+
     } catch (error) {
       console.error('Error adding document: ', error);
       alert('Error submitting report');
     }
   };
-  
+
   return (
     <section id="report" className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
