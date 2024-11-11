@@ -66,7 +66,10 @@ const ChatBot: React.FC = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ message: inputMessage }),
+          body: JSON.stringify({ 
+            message: inputMessage
+          }),
+          credentials: 'include',
         });
 
         if (!response.ok) {
@@ -74,7 +77,10 @@ const ChatBot: React.FC = () => {
         }
 
         const data = await response.json();
-        const botMessage: ChatMessage = { text: data.response, isUser: false };
+        const botMessage: ChatMessage = { 
+          text: data.response,
+          isUser: false 
+        };
         setChatMessages((prev) => [...prev, botMessage]);
       } catch (error) {
         console.error('Error:', error);
@@ -89,14 +95,14 @@ const ChatBot: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-indigo-50 to-pink-50">
-      <div className="w-full max-w-2xl p-6 bg-white shadow-lg rounded-lg border border-gray-200"> {/* Increased max width */}
+      <div className="w-full max-w-2xl p-6 bg-white shadow-lg rounded-lg border border-gray-200">
         <div className="text-center py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-t-lg text-white">
-          <h1 className="text-2xl font-bold">ChatBot</h1>
-          <p className="text-sm">"Your friendly AI assistant"</p>
+          <h1 className="text-2xl font-bold">Sahayak: Your Digital Ally</h1>
+          <p className="text-sm">"We are here if you need us! Please dont hesitate to reach out!!"</p>
         </div>
         <div
           ref={chatContainerRef}
-          className="flex-1 overflow-y-auto p-4 space-y-4 h-96" // Increased height to h-96
+          className="flex-1 overflow-y-auto p-4 space-y-4 h-96"
         >
           {chatMessages.map((msg, index) => (
             <ChatMessage key={index} message={msg.text} isUser={msg.isUser} />
