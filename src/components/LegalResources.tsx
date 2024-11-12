@@ -6,7 +6,7 @@ const LegalResourcesPage = () => {
   const [currentPage, setCurrentPage] = useState(25);
 
   return (
-    <div className="min-h-screen bg-[#0A0D17]">
+    <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-pink-50">
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6">
@@ -20,7 +20,7 @@ const LegalResourcesPage = () => {
         </div>
 
         {/* PDF Viewer Container */}
-        <div className="bg-[#1A1F2E] rounded-lg shadow-xl overflow-hidden">
+        <div className="bg-white rounded-lg shadow-xl overflow-hidden">
           <div className="p-6">
             {/* PDF Viewer */}
             <div className="bg-white rounded-lg overflow-hidden">

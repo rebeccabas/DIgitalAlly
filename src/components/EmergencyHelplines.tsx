@@ -55,7 +55,7 @@ const EmergencyHelplines = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0A0D17]">
+    <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-pink-50">
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6">
@@ -69,9 +69,9 @@ const EmergencyHelplines = () => {
         </div>
 
         {/* Helplines Container */}
-        <div className="bg-[#1A1F2E] rounded-lg shadow-xl overflow-hidden">
+        <div className="bg-white rounded-lg shadow-xl overflow-hidden">
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-white mb-6">Emergency Helplines</h2>
+            <h2 className="text-2xl font-bold text-black mb-6">Emergency Helplines</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {helplines.map((helpline) => (
