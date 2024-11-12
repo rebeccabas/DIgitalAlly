@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import GenerateComplaint from './components/GenerateComplaint';
 import ChatBot from './components/ChatBot';
+import LegalResourcesPage from './components/LegalResources';
 
 function App() {
   const location = useLocation();
@@ -30,6 +31,7 @@ function App() {
         />
         <Route path="/chatbot" element={<ChatBot />} />
         <Route path="/generate-complaint" element={<GenerateComplaint />} />
+        <Route path="/legal-resources" element={<LegalResourcesPage />} />
       </Routes>
       {!hideHeaderFooter && <Footer />}
     </div>

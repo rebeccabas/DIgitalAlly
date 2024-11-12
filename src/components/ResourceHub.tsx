@@ -1,7 +1,10 @@
 import React from 'react';
 import { Phone, Book, Users, Headphones } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function ResourceHub() {
+  const navigate = useNavigate();
+
   const resources = [
     {
       title: "Emergency Hotlines",
@@ -9,6 +12,7 @@ export default function ResourceHub() {
       icon: Phone,
       color: "text-red-600",
       bgColor: "bg-red-100",
+      path: "/emergency"
     },
     {
       title: "Legal Resources",
@@ -16,6 +20,7 @@ export default function ResourceHub() {
       icon: Book,
       color: "text-blue-600",
       bgColor: "bg-blue-100",
+      path: "/legal-resources"
     },
     {
       title: "Support Groups",
@@ -23,6 +28,7 @@ export default function ResourceHub() {
       icon: Users,
       color: "text-green-600",
       bgColor: "bg-green-100",
+      path: "/support-groups"
     },
     {
       title: "Counseling",
@@ -30,8 +36,13 @@ export default function ResourceHub() {
       icon: Headphones,
       color: "text-yellow-600",
       bgColor: "bg-yellow-100",
+      path: "/counseling"
     },
   ];
+
+  const handleResourceClick = (path) => {
+    navigate(path);
+  };
 
   return (
     <section id="resources" className="py-16 bg-gray-50">
@@ -49,7 +60,8 @@ export default function ResourceHub() {
           {resources.map((resource) => (
             <div
               key={resource.title}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+              onClick={() => handleResourceClick(resource.path)}
             >
               <div className="p-6">
                 <div className={`${resource.bgColor} rounded-lg p-3 inline-block`}>

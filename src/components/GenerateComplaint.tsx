@@ -26,27 +26,64 @@ function GenerateComplaint() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const generateComplaintLetter = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/generate-complaint', {
+      // Generate complaint letter
+      const letterResponse = await fetch('http://127.0.0.1:8000/api/generate-complaint', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
       });
-
-      if (response.ok) {
-        const data = await response.json();
+  
+      if (letterResponse.ok) {
+        const data = await letterResponse.json();
         setComplaintLetter(data.complaint_letter);
-      } else {
-        throw new Error('Failed to generate complaint letter');
+  
+        // Save incident data
+        const incidentResponse = await fetch('http://127.0.0.1:8000/api/incidents', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            ...formData,
+            category: formData.filing_type,
+            severity: 3, // Default severity
+            status: 'pending'
+          })
+        });
+  
+        if (!incidentResponse.ok) {
+          throw new Error('Failed to save incident data');
+        }
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  // const generateComplaintLetter = async () => {
+  //   try {
+  //     const response = await fetch('http://127.0.0.1:8000/api/generate-complaint', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(formData)
+  //     });
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setComplaintLetter(data.complaint_letter);
+  //     } else {
+  //       throw new Error('Failed to generate complaint letter');
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-indigo-50 to-pink-50">
