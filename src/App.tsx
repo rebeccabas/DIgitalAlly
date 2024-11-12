@@ -12,7 +12,8 @@ import LegalResourcesPage from './components/LegalResources';
 
 function App() {
   const location = useLocation();
-  const hideHeaderFooter = location.pathname === '/chatbot' || location.pathname === '/generate-complaint';
+  // Update the condition to include '/legal-resources'
+  const hideHeaderFooter = location.pathname === '/chatbot' || location.pathname === '/generate-complaint' || location.pathname === '/legal-resources';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
