@@ -8,12 +8,14 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
+require('dotenv').config();
+
 // Nodemailer transport configuration
 const transporter = nodemailer.createTransport({
     service: 'gmail', // or another SMTP provider
     auth: {
-        user: 'samipgh444@gmail.com',
-        pass: 'huqm gumw rqac gvro ' // or app password if using Gmail
+        user:process.env.EMAIL_USER,
+        pass:process.env.EMAIL_PASS, // or app password if using Gmail
     }
 });
 

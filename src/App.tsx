@@ -28,9 +28,9 @@ function App() {
           path="/"
           element={
             <div className="snap-y snap-mandatory h-screen overflow-y-auto">
-              <section className="snap-start h-screen"><Hero /></section>
-              <section className="snap-start h-screen"><GlobalMap /></section>
-              <section className="snap-start h-screen"><ReportIncident /></section>
+              <section className="snap-start"><Hero /></section>
+              <section className="snap-start"><GlobalMap /></section>
+              <section className="snap-start h-[150vh]"><ReportIncident /></section>
               <section className="snap-start h-screen"><ResourceHub /></section>
             </div>
           }
