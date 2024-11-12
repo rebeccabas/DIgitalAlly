@@ -14,8 +14,11 @@ import SupportGroups from './components/SupportGroups';
 
 function App() {
   const location = useLocation();
-  // Update the condition to include '/legal-resources'
-  const hideHeaderFooter = location.pathname === '/chatbot' || location.pathname === '/generate-complaint' || location.pathname === '/legal-resources';
+  const hideHeaderFooter = location.pathname === '/chatbot' || 
+                          location.pathname === '/generate-complaint' || 
+                          location.pathname === '/legal-resources' ||
+                          location.pathname === '/emergency' ||
+                          location.pathname === '/support-groups';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
@@ -24,12 +27,12 @@ function App() {
         <Route
           path="/"
           element={
-            <>
-              <Hero />
-              <GlobalMap />
-              <ReportIncident />
-              <ResourceHub />
-            </>
+            <div className="snap-y snap-mandatory h-screen overflow-y-auto">
+              <section className="snap-start h-screen"><Hero /></section>
+              <section className="snap-start h-screen"><GlobalMap /></section>
+              <section className="snap-start h-screen"><ReportIncident /></section>
+              <section className="snap-start h-screen"><ResourceHub /></section>
+            </div>
           }
         />
         <Route path="/chatbot" element={<ChatBot />} />

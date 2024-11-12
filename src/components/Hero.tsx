@@ -15,7 +15,7 @@ export default function Hero() {
               </div>
               <h1 className="text-5xl tracking-tight font-extrabold text-gray-900 sm:text-6xl md:text-7xl">
                 <span className="block mb-2">Empowering Women</span>
-                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-500">
+                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-500 py-5">
                   Protecting Rights
                 </span>
               </h1>
