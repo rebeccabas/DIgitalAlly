@@ -36,7 +36,7 @@ export default function ResourceHub() {
       icon: Headphones,
       color: "text-yellow-600",
       bgColor: "bg-yellow-100",
-      path: "/counseling"
+      path: "/chatbot"
     },
   ];
 

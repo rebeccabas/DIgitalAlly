@@ -10,6 +10,7 @@ import GenerateComplaint from './components/GenerateComplaint';
 import ChatBot from './components/ChatBot';
 import LegalResourcesPage from './components/LegalResources';
 import EmergencyHelplines from './components/EmergencyHelplines';
+import SupportGroups from './components/SupportGroups';
 
 function App() {
   const location = useLocation();
@@ -35,6 +36,7 @@ function App() {
         <Route path="/generate-complaint" element={<GenerateComplaint />} />
         <Route path="/legal-resources" element={<LegalResourcesPage />} />
         <Route path="/emergency" element={<EmergencyHelplines />} />
+        <Route path="/support-groups" element={<SupportGroups />} />
       </Routes>
       {!hideHeaderFooter && <Footer />}
     </div>
