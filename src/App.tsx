@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import GenerateComplaint from './components/GenerateComplaint';
 import ChatBot from './components/ChatBot';
 import LegalResourcesPage from './components/LegalResources';
+import EmergencyHelplines from './components/EmergencyHelplines';
 
 function App() {
   const location = useLocation();
@@ -33,6 +34,7 @@ function App() {
         <Route path="/chatbot" element={<ChatBot />} />
         <Route path="/generate-complaint" element={<GenerateComplaint />} />
         <Route path="/legal-resources" element={<LegalResourcesPage />} />
+        <Route path="/emergency" element={<EmergencyHelplines />} />
       </Routes>
       {!hideHeaderFooter && <Footer />}
     </div>
