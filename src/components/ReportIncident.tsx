@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FileText, Camera, Mic, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
@@ -21,8 +21,62 @@ const LocationMarker = ({ setLocation }) => {
   return null;
 };
 
+const handleReportSubmit = async (e) => {
+  e.preventDefault();
+
+  const type = document.getElementById('type')?.value || 'N/A';
+  const description = document.getElementById('description')?.value || '';
+  const anonymous = document.getElementById('anonymous')?.checked || false;
+
+  if (!location) {
+    alert("Please select a location on the map.");
+    return;
+  }
+
+  const incidentData = {
+    type,
+    description,
+    location,
+    anonymous,
+    timestamp: new Date(),
+  };
+
+
+  try {
+    // Send data to Node server to save and send email
+    await axios.post('http://localhost:5000/send-report', incidentData);
+    alert('Incident reported successfully and email sent');
+
+    // Clear form fields
+    document.getElementById('type').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('anonymous').checked = false;
+  } catch (error) {
+    console.error('Error submitting report:', error);
+    alert('Error submitting report');
+  }
+
+
+  try {
+    const docRef = await addDoc(collection(firestore, 'incidents1'), incidentData);
+    console.log('Document written with ID: ', docRef.id);
+    alert('Incident reported successfully');
+
+    // Optionally clear form fields or reset state here, without redirection
+    document.getElementById('type').value = ''; // Resetting example
+    document.getElementById('description').value = '';
+    document.getElementById('anonymous').checked = false;
+
+  } catch (error) {
+    console.error('Error adding document: ', error);
+    alert('Error submitting report');
+  }
+};
+
 export default function ReportIncident() {
   const navigate = useNavigate();
+
+  const [location, setLocation] = useState(null);
 
   const handleGenerateComplaint = () => {
     navigate('/generate-complaint');
@@ -30,16 +84,16 @@ export default function ReportIncident() {
 
   const handleReportSubmit = async (e) => {
     e.preventDefault();
-
+  
     const type = document.getElementById('type')?.value || 'N/A';
     const description = document.getElementById('description')?.value || '';
     const anonymous = document.getElementById('anonymous')?.checked || false;
-
+  
     if (!location) {
       alert("Please select a location on the map.");
       return;
     }
-
+  
     const incidentData = {
       type,
       description,
@@ -47,13 +101,11 @@ export default function ReportIncident() {
       anonymous,
       timestamp: new Date(),
     };
-
-
+  
     try {
       // Send data to Node server to save and send email
       await axios.post('http://localhost:5000/send-report', incidentData);
       alert('Incident reported successfully and email sent');
-
       // Clear form fields
       document.getElementById('type').value = '';
       document.getElementById('description').value = '';
@@ -62,24 +114,22 @@ export default function ReportIncident() {
       console.error('Error submitting report:', error);
       alert('Error submitting report');
     }
-
-
     try {
       const docRef = await addDoc(collection(firestore, 'incidents1'), incidentData);
       console.log('Document written with ID: ', docRef.id);
       alert('Incident reported successfully');
-
+      
       // Optionally clear form fields or reset state here, without redirection
       document.getElementById('type').value = ''; // Resetting example
       document.getElementById('description').value = '';
       document.getElementById('anonymous').checked = false;
-
+  
     } catch (error) {
       console.error('Error adding document: ', error);
       alert('Error submitting report');
     }
   };
-
+  
   return (
     <section id="report" className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -119,6 +169,25 @@ export default function ReportIncident() {
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                 placeholder="Describe what happened..."
               />
+            </div>
+            <div>
+              <label htmlFor="location" className="block text-sm font-medium text-gray-700">Incident Location</label>
+              <input
+                type="text"
+                value={location ? `Lat: ${location.latitude.toFixed(4)}, Lng: ${location.longitude.toFixed(4)}` : 'Click on the map to select a location'}
+                readOnly
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+              />
+              <div className="mt-4 h-60">
+                <MapContainer center={[27.7172, 85.3240]} zoom={8} className="w-full h-full rounded-lg shadow-lg">
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <LocationMarker setLocation={setLocation} />
+                  {location && <Marker position={[location.latitude, location.longitude]} />}
+                </MapContainer>
+              </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
