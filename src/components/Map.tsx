@@ -27,7 +27,7 @@ const MapView: React.FC<MapViewProps> = ({ incidents }) => {
 
             // Perform clustering
             const clustered = turf.clustersKmeans(points, {
-                numberOfClusters: Math.min(5, incidents.length),
+                numberOfClusters: Math.min(3, incidents.length),
                 mutate: true
             });
 
@@ -97,7 +97,11 @@ const MapView: React.FC<MapViewProps> = ({ incidents }) => {
                                     <li key={i} className="mb-1 border-b pb-1">
                                         <span className="font-semibold">{incident.category}</span>
                                         <br />
-                                        <span className="text-xs text-gray-600">{incident.description}</span>
+                                        {incident.anonymous ? (
+                                            <span className="text-xs text-gray-600 italic">Anonymous report</span>
+                                        ) : (
+                                            <span className="text-xs text-gray-600">{incident.description}</span>
+                                        )}
                                     </li>
                                 ))}
                             </ul>
